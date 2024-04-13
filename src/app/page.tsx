@@ -1,6 +1,6 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { ArrowDownToLine, CheckCircle, Leaf } from 'lucide-react';
+import { ArrowDownToLine, CheckCircle, Leaf, Truck } from 'lucide-react';
 import Link from 'next/link';
 
 const perks = [
@@ -17,10 +17,9 @@ const perks = [
       'Every asset on our market is verified by our team to ensure our highest quality standards. Not happy? We offer a 30-day refund guarantee.'
   },
   {
-    name: 'For the Planet',
-    Icon: Leaf,
-    desciption:
-      "We've pledged 1% of sales to the preservation and restoration of the natural enviroment."
+    name: 'Aid for Gaza',
+    Icon: Truck,
+    desciption: "We've pledged 1% of sales to support our brothers and sisters in Gaza."
   }
 ];
 
@@ -34,8 +33,8 @@ export default function Home() {
             <span className="text-blue-600">digital assets</span>.
           </h1>
           <p className="mt-6 text-lg max-w-prose text-muted-foreground">
-            Welcome to DigitalPooBear. Every asset on our market is verified by our team
-            to ensure our highest quality standards.
+            Welcome to DigitalArk. Every asset on our market is verified by our team to
+            ensure our highest quality standards.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
