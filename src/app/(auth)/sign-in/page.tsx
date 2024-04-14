@@ -16,10 +16,14 @@ import {
 import { trpc } from '@/trpc/client';
 import { toast } from 'sonner';
 import { ZodError } from 'zod';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const Page = () => {
+  const searchParams = useSearchParams();
   const router = useRouter();
+  const isSeller = searchParams.get('as') === 'seller';
+  const origin = searchParams.get('origin');
+
   const {
     register,
     handleSubmit,
@@ -28,13 +32,14 @@ const Page = () => {
     resolver: zodResolver(AuthCredentialsValidator)
   });
 
-  const { mutate: signUp, isLoading } = trpc.auth.createPayloadUser.useMutation({
+  const { mutate: signIn, isLoading } = trpc.auth.signIn.useMutation({
     onError: (err) => {
-      if (err.data?.code === 'CONFLICT') {
-        toast.error('This email is already i use. Sign in instead?');
+      if (err.data?.code === 'UNAUTHORIZED') {
+        toast.error('Invalid email or password.');
         return;
       }
 
+      console.log(err);
       if (err instanceof ZodError) {
         toast.error(err.issues[0].message);
         return;
@@ -42,14 +47,21 @@ const Page = () => {
 
       toast.error('Something went wrong. Please try again.');
     },
-    onSuccess: ({ sentToEmail }) => {
-      toast.success(`Verification email sent to ${sentToEmail}.`);
-      router.push('/verify-email?to=' + sentToEmail);
+    onSuccess: ({}) => {
+      toast.success(`Signed in successfully`);
+
+      router.refresh();
+
+      if (origin) return router.push(`/${origin}`);
+
+      if (isSeller) return router.push('/sell');
+
+      router.push('/');
     }
   });
 
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
-    signUp({ email, password });
+    signIn({ email, password });
   };
 
   return (
@@ -58,12 +70,14 @@ const Page = () => {
         <div className="mx-auto w-full flex flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col items-center text-center">
             <Icons.logo className="w-60 h-28" />
-            <h1 className="text-2xl font-bold">Create an account</h1>
+            <h1 className="text-2xl font-bold">
+              Sign in to your {isSeller ? 'seller' : ''} account
+            </h1>
             <Link
               className={buttonVariants({ variant: 'link', className: 'group' })}
-              href="/sign-in"
+              href="/sign-up"
             >
-              Already have an account? Sign-in
+              Dont&apos;t have an account? Sign-up
               <ArrowRight className="w-4 h-4 transition group-hover:translate-x-1" />
             </Link>
           </div>
@@ -96,9 +110,36 @@ const Page = () => {
                   )}
                 </div>
 
-                <Button>Sign up</Button>
+                <Button>Sign in</Button>
               </div>
             </form>
+
+            <div className="relative">
+              <div aria-hidden="true" className="absolute inset-0 items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">or</span>
+              </div>
+            </div>
+
+            {isSeller ? (
+              <Button
+                onClick={() => router.replace('/sign-in', undefined)}
+                variant="secondary"
+                disabled={isLoading}
+              >
+                Continue as customer
+              </Button>
+            ) : (
+              <Button
+                onClick={() => router.push('?as=seller')}
+                variant="secondary"
+                disabled={isLoading}
+              >
+                Continue as seller
+              </Button>
+            )}
           </div>
         </div>
       </div>
