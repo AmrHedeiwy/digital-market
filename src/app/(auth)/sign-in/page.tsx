@@ -5,7 +5,7 @@ import { Label } from '@/components/ui/label';
 import Icons from '@/components/Icons';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -110,7 +110,16 @@ const Page = () => {
                   )}
                 </div>
 
-                <Button>Sign in</Button>
+                <Button disabled={isLoading}>
+                  {isLoading ? (
+                    <div className="flex items-center gap-2">
+                      <Loader2 className="animate-spin h-6 w-6 text-zinc-300" />
+                      <p className="font-semibold text-muted">Loading...</p>
+                    </div>
+                  ) : (
+                    'Sign in'
+                  )}
+                </Button>
               </div>
             </form>
 
