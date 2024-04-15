@@ -15,9 +15,7 @@ const VerifyEmailPage = ({ searchParams }: PageParams) => {
     <div className="container relative pt-20 flex flex-col items-center justify-center lg:px-0">
       <div className="mx-auto w-full flex flex-col justify-center space-y-6 sm:w-[350px]">
         {token && typeof token === 'string' ? (
-          <div className="grid gap-6">
-            <VerifyEmail token={token} />
-          </div>
+          <VerifyEmail token={token} />
         ) : (
           <div className="flex flex-col h-full items-center justify-center space-y-1">
             <Icons.email className="w-60 h-60" />
