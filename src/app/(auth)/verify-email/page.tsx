@@ -7,7 +7,7 @@ interface PageParams {
   };
 }
 
-const VerifyEmailPage = ({ searchParams }: PageParams) => {
+const Page = ({ searchParams }: PageParams) => {
   const token = searchParams.token;
   const toEmail = searchParams.to;
 
@@ -17,17 +17,17 @@ const VerifyEmailPage = ({ searchParams }: PageParams) => {
         {token && typeof token === 'string' ? (
           <VerifyEmail token={token} />
         ) : (
-          <div className="flex flex-col h-full items-center justify-center space-y-1">
+          <div className="flex flex-col h-full  items-center justify-center space-y-1 text-center">
             <Icons.email className="w-60 h-60" />
             <h3 className="font-semibold text-2xl">Check your email</h3>
 
             {toEmail ? (
-              <p className="text-muted-foreground text-center">
+              <p className="text-muted-foreground">
                 We&apos;ve sent a verification link to{' '}
                 <span className="font-semibold">{toEmail}</span>
               </p>
             ) : (
-              <p className="text-muted-foreground text-center">
+              <p className="text-muted-foreground">
                 We&apos;ve sent a verification link to your email.
               </p>
             )}
@@ -38,4 +38,4 @@ const VerifyEmailPage = ({ searchParams }: PageParams) => {
   );
 };
 
-export default VerifyEmailPage;
+export default Page;

@@ -4,7 +4,7 @@ import { getPayloadClient } from '../get-payload';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-export const authRouter = router({
+const authRouter = router({
   createPayloadUser: publicProcedure
     .input(AuthCredentialsValidator)
     .mutation(async ({ input }) => {
@@ -71,3 +71,5 @@ export const authRouter = router({
       }
     })
 });
+
+export default authRouter;
