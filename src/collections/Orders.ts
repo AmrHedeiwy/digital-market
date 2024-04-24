@@ -46,7 +46,7 @@ export const Orders: CollectionConfig = {
       type: 'relationship',
       relationTo: 'users',
       admin: {
-        hidden: false
+        hidden: true
       },
       required: true
     },

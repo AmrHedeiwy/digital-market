@@ -6,7 +6,6 @@ This is a repository for Digital-Market App: Next.js 14, React, Payload, tRPC, T
 
 - 🛠️ Complete marketplace built from scratch in Next.js 14
 - 💻 Beautiful landing page & product pages included
-- 🎨 Custom artwork included
 - 💳 Full admin dashboard
 - 🛍️ Users can purchase and sell their own products
 - 🛒 Locally persisted shopping cart

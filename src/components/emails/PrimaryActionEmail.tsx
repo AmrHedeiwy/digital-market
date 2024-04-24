@@ -28,10 +28,10 @@ export const EmailTemplate = ({ actionLabel, buttonText, href }: EmailTemplatePr
       <Body style={main}>
         <Container style={container}>
           <Img
-            src={`${process.env.NEXT_PUBLIC_SERVER_URL}/hippo-newsletter-sign-up.png`}
+            src={`${process.env.NEXT_PUBLIC_SERVER_URL}/ark-newsletter-sign-up.png`}
             width="150"
             height="150"
-            alt="DigitalHippo"
+            alt="DigitalArk"
             style={logo}
           />
           <Text style={paragraph}>Hi there,</Text>
