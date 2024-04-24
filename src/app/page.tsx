@@ -1,7 +1,7 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import ProductReel from '@/components/ProductReel';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { ArrowDownToLine, CheckCircle, Leaf } from 'lucide-react';
+import { ArrowDownToLine, CheckCircle, Truck } from 'lucide-react';
 import Link from 'next/link';
 
 const perks = [
@@ -18,10 +18,9 @@ const perks = [
       'Every asset on our platform is verified by our team to ensure our highest quality standards. Not happy? We offer a 30-day refund guarantee.'
   },
   {
-    name: 'For the Planet',
-    Icon: Leaf,
-    description:
-      "We've pledged 1% of sales to the preservation and restoration of the natural environment."
+    name: 'For Gaza',
+    Icon: Truck,
+    description: "We've pledged 1% of sales to our brothers and sisters in Gaza."
   }
 ];
 
