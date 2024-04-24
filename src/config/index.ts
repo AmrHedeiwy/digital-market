@@ -5,17 +5,17 @@ export const PRODUCT_CATEGORIES = [
     featured: [
       {
         name: 'Editor picks',
-        href: '#',
+        href: '/products',
         imageSrc: '/nav/ui-kits/mixed.jpg'
       },
       {
         name: 'New Arrivals',
-        href: '#',
+        href: '/products',
         imageSrc: '/nav/ui-kits/blue.jpg'
       },
       {
         name: 'BestSellers',
-        href: '#',
+        href: '/products',
         imageSrc: '/nav/ui-kits/purple.jpg'
       }
     ]
@@ -26,17 +26,17 @@ export const PRODUCT_CATEGORIES = [
     featured: [
       {
         name: 'Favorite Icon Picks',
-        href: '#',
+        href: '/products',
         imageSrc: '/nav/icons/picks.jpg'
       },
       {
         name: 'New Arrivals',
-        href: '#',
+        href: '/products',
         imageSrc: '/nav/icons/new.jpg'
       },
       {
         name: 'BestSelling Icons',
-        href: '#',
+        href: '/products',
         imageSrc: '/nav/icons/bestsellers.jpg'
       }
     ]

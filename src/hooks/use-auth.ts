@@ -13,7 +13,7 @@ const useAuth = () => {
 
       if (!res.ok) throw new Error();
 
-      toast.success('Signed in successfully');
+      toast.success('Signed out successfully');
 
       router.push('/sign-in');
       router.refresh();

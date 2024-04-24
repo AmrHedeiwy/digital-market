@@ -5,7 +5,7 @@ import path from 'path';
 import { buildConfig } from 'payload/config';
 import dotenv from 'dotenv';
 import Users from './collections/Users';
-import { Products } from './collections/Products/Products';
+import { Products } from './collections/Products';
 import { Media } from './collections/Media';
 import { ProductFiles } from './collections/ProductFile';
 import { Orders } from './collections/Orders';

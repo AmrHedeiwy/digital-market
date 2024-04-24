@@ -39,7 +39,6 @@ const Page = () => {
         return;
       }
 
-      console.log(err);
       if (err instanceof ZodError) {
         toast.error(err.issues[0].message);
         return;
@@ -47,16 +46,22 @@ const Page = () => {
 
       toast.error('Something went wrong. Please try again.');
     },
-    onSuccess: ({}) => {
+    onSuccess: async () => {
       toast.success(`Signed in successfully`);
 
-      router.refresh();
+      if (origin) {
+        router.push(`/${origin}`);
 
-      if (origin) return router.push(`/${origin}`);
+        return router.refresh();
+      }
 
-      if (isSeller) return router.push('/sell');
+      if (isSeller) {
+        router.push('/sell');
+        return router.refresh();
+      }
 
       router.push('/');
+      return router.refresh();
     }
   });
 
@@ -68,7 +73,7 @@ const Page = () => {
     <div className="container relative pt-20 flex flex-col items-center justify-center lg:px-0">
       <div className="mx-auto w-full flex flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col items-center text-center">
-          <Icons.logo className="w-60 h-28" />
+          <Icons.logo className="w-24 h-24" />
           <h1 className="text-2xl font-bold">
             Sign in to your {isSeller ? 'seller' : ''} account
           </h1>

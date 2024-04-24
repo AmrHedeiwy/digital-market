@@ -56,7 +56,7 @@ const Page = () => {
     <div className="container relative pt-20 flex flex-col items-center justify-center lg:px-0">
       <div className="mx-auto w-full flex flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col items-center text-center">
-          <Icons.logo className="w-60 h-28" />
+          <Icons.logo className="w-24 h-24" />
           <h1 className="text-2xl font-bold">Create an account</h1>
           <Link
             className={buttonVariants({ variant: 'link', className: 'group' })}
