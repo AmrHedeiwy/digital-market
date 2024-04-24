@@ -2,12 +2,12 @@ import express from 'express';
 import { WebhookRequest } from './server';
 import { stripe } from './lib/stripe';
 import type Stripe from 'stripe';
-import { Resend } from 'resend';
 import { getPayloadClient } from './get-payload';
 import { Product } from './payload-types';
 import { ReceiptEmailHtml } from './components/emails/ReceiptEmail';
+import sgMail from '@sendgrid/mail';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
 export const stripeWebhookHandler = async (
   req: express.Request,
@@ -65,7 +65,7 @@ export const stripeWebhookHandler = async (
     });
 
     try {
-      const data = await resend.emails.send({
+      const data = await sgMail.send({
         from: 'DigitalHippo <amrhedeiwy.public@gmail.com>',
         to: [user.email],
         subject: 'Thanks for your order! This is your receipt.',

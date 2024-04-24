@@ -2,19 +2,10 @@ import dotenv from 'dotenv';
 import path from 'path';
 import payload, { Payload } from 'payload';
 import type { InitOptions } from 'payload/config';
-import nodemailer from 'nodemailer';
+import nodemailerSendgrid from 'nodemailer-sendgrid';
+
 dotenv.config({
   path: path.resolve(__dirname, '../.env.local')
-});
-
-const transporter = nodemailer.createTransport({
-  host: 'smtp.resend.com',
-  secure: true,
-  port: 465,
-  auth: {
-    user: 'resend',
-    pass: process.env.RESEND_API_KEY
-  }
 });
 
 let cached = (global as any).payload;
@@ -40,8 +31,8 @@ export const getPayloadClient = async ({ initOptions }: Args = {}): Promise<Payl
   if (!cached.promise) {
     cached.promise = payload.init({
       email: {
-        transport: transporter,
-        fromAddress: 'onboarding@resend.dev',
+        transportOptions: nodemailerSendgrid({ apiKey: process.env.SENDGRID_API_KEY! }),
+        fromAddress: 'amr.hedeiwy@gmail.com',
         fromName: 'DigitalArk'
       },
       secret: process.env.PAYLOAD_SECRET,

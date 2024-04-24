@@ -63,18 +63,9 @@ exports.getPayloadClient = void 0;
 var dotenv_1 = __importDefault(require("dotenv"));
 var path_1 = __importDefault(require("path"));
 var payload_1 = __importDefault(require("payload"));
-var nodemailer_1 = __importDefault(require("nodemailer"));
+var nodemailer_sendgrid_1 = __importDefault(require("nodemailer-sendgrid"));
 dotenv_1.default.config({
     path: path_1.default.resolve(__dirname, '../.env.local')
-});
-var transporter = nodemailer_1.default.createTransport({
-    host: 'smtp.resend.com',
-    secure: true,
-    port: 465,
-    auth: {
-        user: 'resend',
-        pass: process.env.RESEND_API_KEY
-    }
 });
 var cached = global.payload;
 if (!cached) {
@@ -101,8 +92,8 @@ var getPayloadClient = function () {
                         return [2 /*return*/, cached.client];
                     if (!cached.promise) {
                         cached.promise = payload_1.default.init(__assign({ email: {
-                                transport: transporter,
-                                fromAddress: 'onboarding@resend.dev',
+                                transportOptions: (0, nodemailer_sendgrid_1.default)({ apiKey: process.env.SENDGRID_API_KEY }),
+                                fromAddress: 'amr.hedeiwy@gmail.com',
                                 fromName: 'DigitalArk'
                             }, secret: process.env.PAYLOAD_SECRET, local: (initOptions === null || initOptions === void 0 ? void 0 : initOptions.express) ? false : true }, (initOptions || {})));
                     }

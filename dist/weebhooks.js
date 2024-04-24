@@ -35,13 +35,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.stripeWebhookHandler = void 0;
 var stripe_1 = require("./lib/stripe");
-var resend_1 = require("resend");
 var get_payload_1 = require("./get-payload");
 var ReceiptEmail_1 = require("./components/emails/ReceiptEmail");
-var resend = new resend_1.Resend(process.env.RESEND_API_KEY);
+var mail_1 = __importDefault(require("@sendgrid/mail"));
+mail_1.default.setApiKey(process.env.SENDGRID_API_KEY);
 var stripeWebhookHandler = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var webhookRequest, body, signature, event, session, payload, users, user, orders, order, data, error_1;
     var _a, _b;
@@ -96,7 +99,7 @@ var stripeWebhookHandler = function (req, res) { return __awaiter(void 0, void 0
                 _c.label = 5;
             case 5:
                 _c.trys.push([5, 7, , 8]);
-                return [4 /*yield*/, resend.emails.send({
+                return [4 /*yield*/, mail_1.default.send({
                         from: 'DigitalHippo <amrhedeiwy.public@gmail.com>',
                         to: [user.email],
                         subject: 'Thanks for your order! This is your receipt.',

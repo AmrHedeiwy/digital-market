@@ -36,8 +36,8 @@ export const EmailTemplate = ({ actionLabel, buttonText, href }: EmailTemplatePr
           />
           <Text style={paragraph}>Hi there,</Text>
           <Text style={paragraph}>
-            Welcome to DigitalHippo, the marketplace for high quality digital goods. Use
-            the button below to {actionLabel}.
+            Welcome to DigitalArk, the marketplace for high quality digital goods. Use the
+            button below to {actionLabel}.
           </Text>
           <Section style={btnContainer}>
             <Button style={button} href={href}>
@@ -47,7 +47,7 @@ export const EmailTemplate = ({ actionLabel, buttonText, href }: EmailTemplatePr
           <Text style={paragraph}>
             Best,
             <br />
-            The DigitalHippo team
+            The DigitalArk team
           </Text>
           <Hr style={hr} />
           <Text style={footer}>

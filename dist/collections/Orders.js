@@ -57,7 +57,7 @@ exports.Orders = {
             type: 'relationship',
             relationTo: 'users',
             admin: {
-                hidden: false
+                hidden: true
             },
             required: true
         },
