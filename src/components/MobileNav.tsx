@@ -54,7 +54,7 @@ const MobileNav = ({ user }: { user: User | null }) => {
                 </div>
                 <div className="grid grid-cols-2 gap-4 px-2">
                   {category.featured.map((item) => (
-                    <div className="group relative">
+                    <div className="group relative" key={item.name}>
                       <div className="relative aspect-square overflow-hidden rounded-lg group-hover:opacity-75">
                         <Image
                           fill
