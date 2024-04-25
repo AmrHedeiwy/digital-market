@@ -1,33 +1,13 @@
 'use client';
 
-import { Car, Menu, SlashIcon, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger
-} from '@/components/ui/sheet';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+
 import { PRODUCT_CATEGORIES } from '@/config';
 import Image from 'next/image';
 import Link from 'next/link';
 import { User } from '@/payload-types';
-import Cart from './Cart';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator
-} from './ui/breadcrumb';
 import { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/use-auth';
 import { cn } from '@/lib/utils';
@@ -62,7 +42,12 @@ const MobileNav = ({ user }: { user: User | null }) => {
 
             <SheetClose>
               {user && (
-                <Button variant="destructive" size="sm" onClick={() => signOut()}>
+                <Button
+                  variant="link"
+                  className="text-red-600 hover:text-red-400 hover:underline"
+                  size="sm"
+                  onClick={() => signOut()}
+                >
                   Log out
                 </Button>
               )}
