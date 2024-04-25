@@ -30,6 +30,7 @@ import {
 } from './ui/breadcrumb';
 import { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/use-auth';
+import { cn } from '@/lib/utils';
 
 const MobileNav = ({ user }: { user: User | null }) => {
   const router = useRouter();
@@ -44,6 +45,40 @@ const MobileNav = ({ user }: { user: User | null }) => {
           </Button>
         </SheetTrigger>
         <SheetContent className="flex w-full flex-col sm:max-w-lg overflow-scroll">
+          <div
+            className={cn(
+              'flex items-center justify-between rounded-md border bg-gray-100 w-full mt-4'
+            )}
+          >
+            <SheetClose>
+              <Button
+                className="text-blue-600 hover:text-blue-500 hover:underline"
+                variant="ghost"
+                onClick={() => router.push(user ? '/sell' : '/sign-in')}
+              >
+                {user ? 'Seller Dashboard' : 'Sign in'}
+              </Button>
+            </SheetClose>
+
+            <SheetClose>
+              {user && (
+                <Button variant="destructive" size="sm" onClick={() => signOut()}>
+                  Log out
+                </Button>
+              )}
+
+              {!user && (
+                <Button
+                  variant="ghost"
+                  className="text-blue-600 hover:text-blue-500 hover:underline"
+                  size="sm"
+                  onClick={() => router.push('/sign-up')}
+                >
+                  Create account
+                </Button>
+              )}
+            </SheetClose>
+          </div>
           <ul>
             {PRODUCT_CATEGORIES.map((category) => (
               <li className="space-y-10 px-2 py-6" key={category.label}>
@@ -77,33 +112,6 @@ const MobileNav = ({ user }: { user: User | null }) => {
               </li>
             ))}
           </ul>
-          <SheetFooter>
-            <div className="flex items-center justify-center rounded-md border bg-gray-100 w-full">
-              <SheetClose asChild>
-                <Button
-                  variant="ghost"
-                  onClick={() => router.push(user ? '/sell' : '/sign-in')}
-                >
-                  {user ? 'Dashboard' : 'Sign in'}
-                </Button>
-              </SheetClose>
-
-              <SlashIcon className="w-4 h-4" />
-
-              <SheetClose asChild>
-                <Button
-                  variant="ghost"
-                  onClick={() => (user ? signOut() : router.push('/sign-up'))}
-                >
-                  {user ? 'Log out' : 'Sign up'}
-                </Button>
-              </SheetClose>
-
-              <div className="ml-auto mr-4">
-                <Cart />
-              </div>
-            </div>
-          </SheetFooter>
         </SheetContent>
       </Sheet>
     </div>

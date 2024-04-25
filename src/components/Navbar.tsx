@@ -31,6 +31,7 @@ const Navbar = async () => {
 
               <div className="ml-auto flex items-center">
                 <MobileNav user={user} />
+
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                   {user ? null : (
                     <Link
@@ -65,10 +66,10 @@ const Navbar = async () => {
                       <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                     </div>
                   )}
+                </div>
 
-                  <div className="ml-4 flow-root lg:ml-6">
-                    <Cart />
-                  </div>
+                <div className="lg:ml-6">
+                  <Cart />
                 </div>
               </div>
             </div>
